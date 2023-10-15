@@ -2,7 +2,6 @@ import { z } from "zod";
 
 import { publicProcedure, router, privateProcedure } from "./trpc";
 import prismadb from "@/lib/prismadb";
-import BlogByIdPage from "@/app/(main)/(routes)/blogs/[blogId]/page";
 
 export const appRouter = router({
   onboarding: privateProcedure

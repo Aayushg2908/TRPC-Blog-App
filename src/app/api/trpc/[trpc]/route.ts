@@ -4,7 +4,7 @@ import { createContext } from "@/server/trpc"
 
 const handler = (req: Request) =>
   fetchRequestHandler({
-    endpoint: "/api/trpc",
+    endpoint: "https://trpc-blog-3eb0ktvtd-aayushg2908.vercel.app/api/trpc",
     req,
     router: appRouter,
     createContext: createContext,
