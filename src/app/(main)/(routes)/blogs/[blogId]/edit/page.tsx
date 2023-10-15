@@ -42,17 +42,17 @@ const EditBlogPage = ({ params }: { params: { blogId: string } }) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: blog.data?.blogById?.title || "",
-      content: blog.data?.blogById?.content || "",
-      imageURL: blog.data?.blogById?.imageURL || "",
+      content: blog.data?.blogById?.title || "",
+      imageURL: blog.data?.blogById?.title || "",
     },
   });
 
   useEffect(() => {
     if (blog.data) {
       form.reset({
-        title: blog.data.blogById?.title,
+        title: blog.data?.blogById?.title,
         content: blog.data?.blogById?.content,
-        imageURL: blog.data.blogById?.imageURL,
+        imageURL: blog.data?.blogById?.imageURL,
       });
     }
   }, []);
