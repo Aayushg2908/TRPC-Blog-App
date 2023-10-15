@@ -261,15 +261,24 @@ export const appRouter = router({
       })
     )
     .query(async (opts) => {
+      const user = await prismadb.user.findFirst({
+        where: {
+          userId: opts.ctx.userId,
+        },
+        select: {
+          id: true,
+        }
+      })
       const like = await prismadb.like.findFirst({
         where: {
           postId: opts.input.blogId,
+          authorId: user?.id,
         },
         include: {
           author: true,
         },
       });
-      if (like?.author.userId === opts.ctx.userId) {
+      if (like) {
         return {
           code: 200,
           hasCurrentUserLiked: true,
