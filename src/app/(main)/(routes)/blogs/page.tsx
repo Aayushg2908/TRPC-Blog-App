@@ -35,7 +35,7 @@ const BlogPage = () => {
   return (
     <div className="mx-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 pb-10 mt-4">
       {blogs.data.map((blog) => (
-        <CardComponent blog={blog}  />
+        <CardComponent blog={blog} profile={false} />
       ))}
     </div>
   );

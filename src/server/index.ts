@@ -128,6 +128,11 @@ export const appRouter = router({
       include: {
         likes: true,
         comments: true,
+        author: {
+          select: {
+            username: true,
+          }
+        }
       },
     });
     return blogs;
@@ -354,5 +359,25 @@ export const appRouter = router({
         blog: blog,
       };
     }),
+  userBlogs: privateProcedure.query(async (opts) => {
+    const user = await prismadb.user.findFirst({
+      where: {
+        userId: opts.ctx.userId,
+      },
+    });
+    const userBlogs = await prismadb.post.findMany({
+      where: {
+        authorId: user?.id,
+      },
+      include: {
+        likes: true,
+        comments: true,
+      },
+    });
+    return {
+      code: 200,
+      userBlogs: userBlogs,
+    };
+  }),
 });
 export type AppRouter = typeof appRouter;

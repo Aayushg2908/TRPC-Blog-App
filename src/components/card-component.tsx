@@ -15,7 +15,12 @@ import { Heart, Cloud } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-const CardComponent = ({ blog }: { blog: any }) => {
+interface CardComponentProps {
+  blog: any;
+  profile?: boolean;
+}
+
+const CardComponent = ({ blog, profile }: CardComponentProps) => {
   const router = useRouter();
   const likes = trpc.LikeBlog.useMutation({
     onSuccess: (data) => {
@@ -29,7 +34,6 @@ const CardComponent = ({ blog }: { blog: any }) => {
     },
   });
   const { data } = trpc.hasCurrentUserLiked.useQuery({ blogId: blog.id });
-  console.log(data?.hasCurrentUserLiked);
 
   return (
     <Card key={blog.id} className="rounded-xl cursor-pointer">
@@ -67,6 +71,7 @@ const CardComponent = ({ blog }: { blog: any }) => {
           {blog.comments.length}
         </div>
       </CardFooter>
+      {!profile && <CardFooter>Created By:- {blog.author.username}</CardFooter>}
     </Card>
   );
 };
