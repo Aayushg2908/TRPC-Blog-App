@@ -11,7 +11,7 @@ const TRPCProvider = ({ children }: PropsWithChildren) => {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: "http://localhost:3000/api/trpc",
+          url: "https://trpc-blog-3eb0ktvtd-aayushg2908.vercel.app/api/trpc",
         }),
       ],
     })
